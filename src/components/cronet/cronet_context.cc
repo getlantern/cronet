@@ -424,8 +424,9 @@ CronetContext::NetworkTasks::BuildDefaultURLRequestContext(
         g_net_log.Get().net_log(), &context_builder);
   }
 
+
   default_cert_net_fetcher_ = base::MakeRefCounted<net::CertNetFetcherURLRequest>();
-  context_builder.SetCertVerifier(net::CertVerifier::CreateDefault(default_cert_net_fetcher_));
+  //context_builder.SetCertVerifier(net::CertVerifier::CreateDefault(default_cert_net_fetcher_));
 
   auto context = context_builder.Build();
 
@@ -640,7 +641,8 @@ net::URLRequestContextGetter* CronetContext::CreateURLRequestContextGetter() {
 net::URLRequestContext* CronetContext::GetURLRequestContext(
     net::handles::NetworkHandle network) {
   DCHECK(IsOnNetworkThread());
-  return network_tasks_->GetURLRequestContext(network);
+  auto *uc = network_tasks_->GetURLRequestContext(network);
+  return uc; 
 }
 
 void CronetContext::PostTaskToNetworkThread(const base::Location& posted_from,

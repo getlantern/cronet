@@ -126,7 +126,7 @@ class NET_EXPORT CertVerifyProc
   // |additional_trust_anchors| lists certificates that can be trusted when
   // building a certificate chain, in addition to the anchors known to the
   // implementation.
-  int Verify(X509Certificate* cert,
+  virtual int Verify(X509Certificate* cert,
              const std::string& hostname,
              const std::string& ocsp_response,
              const std::string& sct_list,

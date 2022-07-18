@@ -484,6 +484,7 @@ void Cronet_EngineImpl::Callback::OnStopNetLogCompleted() {
 void Cronet_EngineImpl::SetMockCertVerifierForTesting(
     std::unique_ptr<net::CertVerifier> mock_cert_verifier) {
   CHECK(!context_);
+  LOG(ERROR) << "Cronet_EngineImpl::SetMockCertVerifierForTesting " << mock_cert_verifier << "\n";
   mock_cert_verifier_ = std::move(mock_cert_verifier);
 }
 
@@ -501,10 +502,15 @@ CRONET_EXPORT Cronet_EnginePtr Cronet_Engine_Create() {
 CRONET_EXPORT void Cronet_Engine_SetMockCertVerifierForTesting(
     Cronet_EnginePtr engine,
     void* raw_mock_cert_verifier) {
+
+  LOG(ERROR) << "Cronet_Engine_SetMockCertVerifierForTesting " << raw_mock_cert_verifier << "\n";
+
   cronet::Cronet_EngineImpl* engine_impl =
       static_cast<cronet::Cronet_EngineImpl*>(engine);
   std::unique_ptr<net::CertVerifier> cert_verifier;
-  cert_verifier.reset(static_cast<net::CertVerifier*>(raw_mock_cert_verifier));
+  net::CertVerifier *cv = static_cast<net::CertVerifier*>(raw_mock_cert_verifier);
+  LOG(ERROR) << "Cronet_Engine_SetMockCertVerifierForTesting static_cast => " << cv << "\n";
+  cert_verifier.reset(cv);
   engine_impl->SetMockCertVerifierForTesting(std::move(cert_verifier));
 }
 

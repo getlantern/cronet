@@ -1,0 +1,19 @@
+source_set("headers") {
+  public = [ "include/webtx_c.h" ]
+}
+
+source_set("cronet_webtransport") {
+  sources = [
+    "cert_verify_proc_pinned.cc",
+    "cert_verify_proc_pinned.h",
+    "webtx.cc",
+    "include/webtx_c.h",
+  ]
+
+  deps = [
+    ":headers",
+    "//base",
+    "//net",
+    "//url",
+  ]
+}

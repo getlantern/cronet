@@ -1,3 +1,26 @@
+# Fork of NaiveProxy Cronet for Lantern
+
+This is a fork of naive proxy's fork of the chromium networking stack with additional exposure of webtransport components and
+certain adjustments to certificate verification for use with Lantern.
+
+** This should not be used for general purposes and may include insecure modes of operation not recommended for any normal purpose **
+
+These changes are rebased on the upstream http://github.com/klzgrad/naiveproxy repository to update the chromium version.
+To add the upstream repository take these additional steps:
+```
+git remote add upstream git@github.com:klzgrad/naiveproxy.git
+git remote set-url --push upstream DISABLE
+```
+
+To attempt a rebase on a more recent upstream, use the following steps
+```
+git fetch upstream
+git tag snapshot_<version>
+git push origin --tags
+git rebase -i --onto <version tag> upstream/master
+... take only our commits
+```
+
 # NaïveProxy and Cronet ![build workflow](https://github.com/klzgrad/naiveproxy/actions/workflows/build.yml/badge.svg)
 
 NaïveProxy uses Chromium's network stack to camouflage traffic with strong censorship resistence and low detectablility. Reusing Chrome's stack also ensures best practices in performance and security.

@@ -1,7 +1,7 @@
 name: Build
 on:
   push:
-    branches: [master]
+    branches: [main]
     paths-ignore: [README.md]
   release:
     types: [published]
@@ -97,7 +97,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        arch: [x64, x86, arm64, arm, mipsel, mips64el]
+        arch: [x64, x86] #, arm64, arm, mipsel, mips64el]
     env:
       EXTRA_FLAGS: 'target_cpu="${{ matrix.arch }}"'
       BUNDLE: naiveproxy-${{ github.event.release.tag_name }}-${{ github.job }}-${{ matrix.arch }}
@@ -156,11 +156,13 @@ jobs:
           openssl sha256 out/Release/naive >sha256sum.txt
           echo "SHA256SUM=$(cut -d' ' -f2 sha256sum.txt)" >>$GITHUB_ENV
       - uses: actions/upload-artifact@v2
+        if: ${{ false }} # disabled
         with:
           name: ${{ env.BUNDLE }}.tar.xz naive executable sha256 ${{ env.SHA256SUM }}
           path: src/sha256sum.txt
       - name: Upload naiveproxy assets
-        if: ${{ github.event_name == 'release' }}
+        if: ${{ false }} # disabled
+        #if: ${{ github.event_name == 'release' }}
         run: hub release edit -a ${{ env.BUNDLE }}.tar.xz -m "" "${GITHUB_REF##*/}"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -252,11 +254,13 @@ jobs:
           openssl sha256 out/Release/naive >sha256sum.txt
           echo "SHA256SUM=$(cut -d' ' -f2 sha256sum.txt)" >>$GITHUB_ENV
       - uses: actions/upload-artifact@v2
+        if: ${{ false }} # disabled
         with:
           name: ${{ env.BUNDLE }}.tar.xz naive executable sha256 ${{ env.SHA256SUM }}
           path: src/sha256sum.txt
       - name: Upload naiveproxy assets
-        if: ${{ github.event_name == 'release' }}
+        if: ${{ false }} # disabled
+        #if: ${{ github.event_name == 'release' }}
         run: hub release edit -a ${{ env.BUNDLE }}.tar.xz -m "" "${GITHUB_REF##*/}"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -339,11 +343,13 @@ jobs:
           openssl sha256 out/Release/naive.exe >sha256sum.txt
           echo "SHA256SUM=$(cut -d' ' -f2 sha256sum.txt)" >>$GITHUB_ENV
       - uses: actions/upload-artifact@v2
+        if: ${{ false }} # disabled
         with:
           name: ${{ env.BUNDLE }}.zip naive executable sha256 ${{ env.SHA256SUM }}
           path: src/sha256sum.txt
       - name: Upload naiveproxy assets
-        if: ${{ github.event_name == 'release' }}
+        if: ${{ false }} # disabled
+        #if: ${{ github.event_name == 'release' }}
         run: hub release edit -a ${{ env.BUNDLE }}.zip -m "" "${GITHUB_REF##*/}"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -414,11 +420,13 @@ jobs:
           openssl sha256 out/Release/naive >sha256sum.txt
           echo "SHA256SUM=$(cut -d' ' -f2 sha256sum.txt)" >>$GITHUB_ENV
       - uses: actions/upload-artifact@v2
+        if: ${{ false }} # disabled
         with:
           name: ${{ env.BUNDLE }}.tar.xz naive executable sha256 ${{ env.SHA256SUM }}
           path: src/sha256sum.txt
       - name: Upload naiveproxy assets
-        if: ${{ github.event_name == 'release' }}
+        if: ${{ false }} # disabled
+        #if: ${{ github.event_name == 'release' }}
         run: hub release edit -a ${{ env.BUNDLE }}.tar.xz -m "" "${GITHUB_REF##*/}"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -473,6 +481,7 @@ jobs:
       - run: ./build.sh
       - run: ccache -s
   openwrt:
+    if: ${{ false }} # disabled
     needs: cache-toolchains-posix
     runs-on: ubuntu-20.04
     strategy:
@@ -628,11 +637,13 @@ jobs:
           openssl sha256 out/Release/naive >sha256sum.txt
           echo "SHA256SUM=$(cut -d' ' -f2 sha256sum.txt)" >>$GITHUB_ENV
       - uses: actions/upload-artifact@v2
+        if: ${{ false }} # disabled
         with:
           name: ${{ env.BUNDLE }}.tar.xz naive executable sha256 ${{ env.SHA256SUM }}
           path: src/sha256sum.txt
       - name: Upload naiveproxy assets
-        if: ${{ github.event_name == 'release' }}
+        if: ${{ false }} # disabled
+        #if: ${{ github.event_name == 'release' }}
         run: hub release edit -a ${{ env.BUNDLE }}.tar.xz -m "" "${GITHUB_REF##*/}"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

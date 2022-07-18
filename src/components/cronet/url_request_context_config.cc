@@ -964,6 +964,7 @@ void URLRequestContextConfig::ConfigureURLRequestContextBuilder(
   context_builder->set_quic_context(std::move(quic_context));
 
   if (mock_cert_verifier)
+    LOG(ERROR) << "URLRequestContextConfig::ConfigureURLRequestContextBuilder ... yes I am setting context_builder->SetCertVerifier to " << mock_cert_verifier << "\n";
     context_builder->SetCertVerifier(std::move(mock_cert_verifier));
   // Certificate Transparency is intentionally ignored in Cronet.
   // See //net/docs/certificate-transparency.md for more details.

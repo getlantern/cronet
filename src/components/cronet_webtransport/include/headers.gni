@@ -1,0 +1,2 @@
+cronet_webtransport_public_headers =
+    [ "//components/cronet_webtransport/include/webtx_c.h" ]

@@ -4,6 +4,7 @@
 
 import("//components/cronet/native/include/headers.gni")
 import("//components/grpc_support/include/headers.gni")
+import("//components/cronet_webtransport/include/headers.gni")
 
 config("cronet_native_include_config") {
   include_dirs = [
@@ -17,6 +18,7 @@ source_set("cronet_native_headers") {
   deps = [
     "//base",
     "//components/grpc_support:headers",
+    "//components/cronet_webtransport:headers",
   ]
 
   configs += [ ":cronet_native_include_config" ]
@@ -42,6 +44,7 @@ source_set("cronet_native_impl") {
     "//components/cronet:cronet_version_header",
     "//components/cronet:metrics_util",
     "//components/grpc_support:grpc_support",
+    "//components/cronet_webtransport",
     "//net",
   ]
 

@@ -77,6 +77,7 @@ cp -a components/cronet/native/generated/cronet.idl_c.h out/Release/cronet/
 cp -a components/cronet/native/include/cronet_c.h out/Release/cronet/
 cp -a components/cronet/native/include/cronet_export.h out/Release/cronet/
 cp -a components/grpc_support/include/bidirectional_stream_c.h out/Release/cronet/
+cp -a components/cronet_webtransport/include/webtx_c.h out/Release/cronet/
 if [ "$WITH_SYSROOT" ]; then
   cp -a "$PWD/$WITH_SYSROOT" out/Release/cronet/sysroot
 fi
